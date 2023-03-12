@@ -1,0 +1,74 @@
+﻿@model List<TaskManagement.Web.Models.Employee.EmployeeDetailsViewModel>
+@{
+    ViewData["Title"] = "Employees Details";
+}
+
+<div class="container col-lg-12">
+    <div class="row col-sm-8 center bg-light rounded mt-4 p-4">
+        <h3 class="mb-3">All employees in the company</h3>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Full name</th>
+                        <th scope="col">Date of birth</th>
+                        <th scope="col">Phone number</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Tasks</th>
+                        <th scope="col">Salary</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var employee in Model)
+                    {
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>
+                                <a asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id">@employee.FullName</a>
+                            </td>
+                            <td>@employee.DateOfBirth</td>
+                            <td>@employee.PhoneNumber</td>
+                            <td>@employee.Email</td>
+                            <td><a href="" name="ViewTasksOfEmployee" data="@employee.Id" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a></td>
+                            <td>@employee.Salary BGN</td>
+                            <td>
+                                <a class="btn btn-outline-danger btn-sm" asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Employee tasks</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Due date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tasksResult">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

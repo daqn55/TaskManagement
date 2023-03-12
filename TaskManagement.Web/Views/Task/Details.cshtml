@@ -1,0 +1,29 @@
+﻿@model TaskManagement.Web.Models.Task.TaskDetailsViewModel
+@{
+    ViewData["Title"] = "Task Details";
+}
+
+<div class="container col-lg-12">
+    <div class="row col-sm-6 center bg-light rounded mt-4 p-4">
+        <h3 class="mb-3">@Model.Title</h3>
+        <div>
+            <span>This task is from project: @Model.ProjectName</span>
+            <br />
+            <span>Due date: @Model.DueDate</span>
+            <br />
+            <span>Status: @Model.Status</span>
+            <p>Description: @Model.Description</p>
+            <span>
+                Employee assignee to this task:
+                @if (string.IsNullOrEmpty(Model.AssigneeName))
+                {
+                   @Html.Raw("none");
+                }
+                else
+                {
+                    @Model.AssigneeName
+                }
+            </span>
+        </div>
+    </div>
+</div>

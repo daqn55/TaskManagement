@@ -1,0 +1,28 @@
+﻿<div id="listOfTopFiveProjects" class="mt-5" style="display: none">
+    <div class="ms-3"><h5 class="bi bi-arrow-down-square-fill"> Top 5 projects with most completed tasks for the past month</h5></div>
+    <div class="ms-5 me-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Project</th>
+                    <th scope="col">Completed tasks</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int countTopProjects = 1;
+                }
+                @foreach (var project in Model.TopFiveProjectsViewModel)
+                {
+                    <tr>
+                        <th scope="row">@countTopProjects</th>
+                        <td>@project.ProjectName</td>
+                        <td>@project.CompletedTasks</td>
+                    </tr>
+                    countTopProjects++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

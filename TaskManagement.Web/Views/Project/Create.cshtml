@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Create Project";
+}
+
+<div class="container col-lg-12">
+    <div class="row col-sm-6 center">
+        <h3 class="mb-3 mt-3">Create new project</h3>
+        <form asp-controller="Project" asp-action="Create" autocomplete="off" method="post" enctype="multipart/form-data">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingNameInput" placeholder="name" name="Name">
+                <label for="floatingNameInput">Name</label>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea class="form-control" id="floatingDescriptionInput" placeholder="description" name="Description" style="height: 150px;"></textarea>
+                <label for="floatingDescriptionInput">Description</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Create project</button>
+        </form>
+    </div>
+</div>

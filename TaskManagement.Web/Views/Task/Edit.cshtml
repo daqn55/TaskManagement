@@ -1,0 +1,52 @@
+﻿@model TaskManagement.Web.Models.Task.TaskEditViewModel
+@{
+    ViewData["Title"] = "Edit Task";
+}
+
+<div class="container col-lg-12">
+    <div class="row col-sm-6 center">
+        <h3 class="mb-3 mt-3">Edit task</h3>
+        <form asp-controller="Task" asp-action="Edit" autocomplete="off" method="post" enctype="multipart/form-data">
+            <div class="mb-3"><b>Project:</b> @Model.ProjectName</div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingTitleInput" placeholder="title" name="Title" value="@Model.Title">
+                <label for="floatingTitleInput">Title</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="floatingDueDateInput" placeholder="dueDate" name="DueDate" value="@Model.DueDate" />
+                <label for="floatingDueDateInput">Due date</label>
+            </div>
+            <div>
+                <label class="ms-1" for="assigneeEmployee">Assignee employee</label>
+                <select class="form-select mb-3" id="assigneeEmployee" name="AssigneeId">
+                    <option value="@Model.AssigneeId" selected>@Model.AssigneeName</option>
+                    @foreach (var employee in Model.EmployeesModel)
+                    {
+                        <option value="@employee.Id">@employee.FullName</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label class="ms-1" for="taskStatus">Status</label>
+                <select class="form-select mb-3" id="taskStatus" name="StatusOfTask">
+                    @if (Model.Status == 0)
+                    {
+                        <option value="0" selected>Working on it</option>
+                        <option value="1">Done</option>
+                    }
+                    else
+                    {
+                        <option value="0">Working on it</option>
+                        <option value="1" selected>Done</option>
+                    }
+                </select>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea class="form-control" id="floatingDescriptionInput" placeholder="description" name="Description" style="height: 150px;">@Model.Description</textarea>
+                <label for="floatingDescriptionInput">Description</label>
+            </div>
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+    </div>
+</div>

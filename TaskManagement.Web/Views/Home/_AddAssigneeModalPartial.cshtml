@@ -1,0 +1,27 @@
+﻿<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-controller="Task" asp-action="AddAssignee">
+                <div class="modal-body">
+                    <div class="list-group">
+                        <select class="form-select" size="5" name="employeeId">
+                            @foreach (var employee in Model.EmployeeViewModel)
+                            {
+                                <option value="@employee.Id">@employee.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <input id="TaskId" type="hidden" name="taskId" value="" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" id="addAssignee" class="btn btn-primary">Add assignee</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

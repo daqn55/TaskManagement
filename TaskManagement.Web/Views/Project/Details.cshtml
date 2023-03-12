@@ -1,0 +1,40 @@
+﻿@model TaskManagement.Web.Models.Project.ProjectDetailsViewModel
+@{
+    ViewData["Title"] = "Project Details";
+}
+
+<div class="container col-lg-12">
+    <div class="row col-sm-6 center bg-light rounded mt-4 p-4">
+        <h3 class="mb-3">@Model.Name</h3>
+        <div>
+            <span>Created on: @Model.DateOfCreation</span>
+            <p>@Model.Description</p>
+            <span class="bi bi-arrow-down-square-fill fw-bold"> Tasks in the project</span>
+            <div class="ms-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Assignee</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Due date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var task in Model.TasksModel)
+                        {
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>@task.Title</td>
+                                <td>@task.AssigneeName</td>
+                                <td>@task.Status</td>
+                                <td>@task.DueDate</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+﻿@model TaskManagement.Web.Models.Home.HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div>
+    <div class="ms-2">
+        <span>Filters</span>
+        <button id="topFiveEmployees" class="btn btn-outline-primary btn-sm ms-4 rounded-pill">Top 5 employees</button>
+        <button id="topFiveProjects" class="btn btn-outline-primary btn-sm ms-2 rounded-pill">Top 5 projects</button>
+    </div>
+    <hr class="mt-2" />
+</div>
+<partial name="_TopFiveEmployeesPartial" />
+<partial name="_TopFiveProjectsPartial" />
+<div class="mt-5">
+    <div class="ms-3"><h5 class="bi bi-arrow-down-square-fill"> All current tasks</h5></div>
+    <div class="ms-5 me-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Assignee</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Due date</th>
+                    <th scope="col">Project</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int countTasks = 1;
+                }
+                @foreach (var task in Model.TaskViewModel)
+                {
+                    <tr>
+                        <th scope="row">@countTasks</th>
+                        <td>
+                            <a asp-controller="Task" asp-action="Details" asp-route-id="@task.Id">@task.Title</a>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="btn btn-outline-danger btn-sm ms-2" asp-controller="Task" asp-action="Edit" asp-route-id="@task.Id">Edit</a>
+                                <a class="btn btn-outline-danger btn-sm ms-1" asp-controller="Task" asp-action="Delete" asp-route-id="@task.Id">Delete</a>
+                            }
+                        </td>
+                        <td>
+                            @if (string.IsNullOrEmpty(task.AssigneeName))
+                            {
+                                <a name="addBtn" data-taskId="@task.Id" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="bi bi-plus-circle"></i><span> Add</span>
+                                </a>
+                            }
+                            else
+                            {
+                                @task.AssigneeName
+                            }
+                        </td>
+                        <td>@task.Status</td>
+                        <td>@task.DueDate</td>
+                        <td>@task.ProjectName</td>
+                    </tr>
+                    countTasks++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="mt-5">
+    <div class="ms-3"><h5 class="bi bi-arrow-down-square-fill"> All current projects</h5></div>
+    <div class="ms-5 me-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Project</th>
+                    <th scope="col">Tasks in the project</th>
+                    <th scope="col">Date of creation</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int countProjects = 1;
+                }
+                @foreach (var project in Model.ProjectViewModel)
+                {
+                    <tr>
+                        <th scope="row">@countProjects</th>
+                        <td>
+                            <a asp-controller="Project" asp-action="Details" asp-route-id="@project.Id">@project.Name</a>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a class="btn btn-outline-danger btn-sm ms-2" asp-controller="Project" asp-action="Edit" asp-route-id="@project.Id">Edit</a>
+                            }
+                        </td>
+                        <td>@project.TasksCount</td>
+                        <td>@project.DateOfCreation</td>
+                    </tr>
+                    countProjects++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<partial name="_AddAssigneeModalPartial" />

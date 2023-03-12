@@ -1,0 +1,28 @@
+﻿<div id="listOfTopFiveEmployees" class="mt-5" style="display: none">
+    <div class="ms-3"><h5 class="bi bi-arrow-down-square-fill"> Top 5 employees with the largest number of tasks in the past month</h5></div>
+    <div class="ms-5 me-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Employee</th>
+                    <th scope="col">Completed tasks</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int count = 1;
+                }
+                @foreach (var employee in Model.TopFiveEmployeesViewModel)
+                {
+                    <tr>
+                        <th scope="row">@count</th>
+                        <td>@employee.FullName</td>
+                        <td>@employee.CompletedTasks</td>
+                    </tr>
+                    count++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

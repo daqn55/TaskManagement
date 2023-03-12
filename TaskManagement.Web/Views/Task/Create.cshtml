@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Create Task";
+}
+
+<div class="container col-lg-12">
+    <div class="row col-sm-6 center">
+        <h3 class="mb-3 mt-3">Create new task</h3>
+        <form asp-controller="Task" asp-action="Create" autocomplete="off" method="post" enctype="multipart/form-data">
+            <select class="form-select mb-3" name="ProjectId">
+                <option selected disabled>Please select project for the task</option>
+                @if (Model != null)
+                {
+                    @foreach (var projectId in Model)
+                    {
+                        <option value="@(projectId.Value)">@(projectId.Key)</option>
+                    }
+                }
+            </select>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingTitleInput" placeholder="title" name="Title">
+                <label for="floatingTitleInput">Title</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="floatingDueDateInput" placeholder="dueDate" name="DueDate" />
+                <label for="floatingDueDateInput">Due date</label>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea class="form-control" id="floatingDescriptionInput" placeholder="description" name="Description" style="height: 150px;"></textarea>
+                <label for="floatingDescriptionInput">Description</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Task</button>
+        </form>
+    </div>
+</div>
